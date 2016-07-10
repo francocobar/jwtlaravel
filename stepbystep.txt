@@ -1,0 +1,33 @@
+
+providers
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+aliases
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+config\api.php
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Providers
+|--------------------------------------------------------------------------
+|
+| The authentication providers that should be used when attempting to
+| authenticate an incoming API request.
+|
+*/
+
+'auth' => [
+    'jwt' => 'Dingo\Api\Auth\Provider\JWT'
+],
+
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\JWTAuthServiceProvider"
+
+php artisan jwt:generate
+
+Kernel.php
+protected $routeMiddleware = [
+        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
+        'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
+    ];
+}
