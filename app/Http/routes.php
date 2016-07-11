@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TestingController@index');
 
 
-// Route::get('/test', 'TestingController@index');
+Route::post('api/register', 'TestingController@register');
+Route::post('api/authenticate', 'TestingController@authenticate');
+Route::get('api/authenticate/user', 'TestingController@getAuthenticatedUser');
